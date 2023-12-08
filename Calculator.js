@@ -1,95 +1,47 @@
-let runningTotal = 0;
-let buffer = "0";
-let previousOperator;
-const screen = document.querySelector(".screen");
+// Get references to the form and its inputs
+const form = document.querySelector('form');
+const num1Input = document.getElementById('num1');
+const num2Input = document.getElementById('num2');
+const opSelect = document.getElementById('op');
+const resultElement = document.getElementById('result');
 
-function buttonClick(value) {
-  if (isNaN(parseInt(value))) {
-    handleSymbol(value);
-  } else {
-    handleNumber(value);
-  }
-  rerender();
-}
+// Add event listeners to the form and its inputs
+form.addEventListener('submit', (event) => {
+ // Prevent the default form submission behavior
+ event.preventDefault();
 
-function handleNumber(value) {
-  if (buffer === "0") {
-    buffer = value;
-  } else {
-    buffer += value;
-  }
-}
+ // Get the values of the input fields
+ const num1Value = parseFloat(num1Input.value);
+ const num2Value = parseFloat(num2Input.value);
+ const opValue = opSelect.value;
 
-function handleMath(value) {
-  if (buffer === "0") {
-    // do nothing
-    return;
-  }
+ // Perform the calculation based on the selected operation
+ let result;
+ switch (opValue) {
+   case '+':
+     result = num1Value + num2Value;
+     break;
+   case '-':
+     result = num1Value - num2Value;
+     break;
+   case '*':
+     result = num1Value * num2Value;
+     break;
+   case '/':
+     result = num1Value / num2Value;
+     break;
+   default:
+     result = 'Invalid operation';
+     break;
+ }
 
-  const intBuffer = parseInt(buffer);
-  if (runningTotal === 0) {
-    runningTotal = intBuffer;
-  } else {
-    flushOperation(intBuffer);
-  }
+ // Display the result in the "Result" field
+ resultElement.innerHTML = `The result is ${result}`;
+});
 
-  previousOperator = value;
-
-  buffer = "0";
-}
-
-function flushOperation(intBuffer) {
-  if (previousOperator === "+") {
-    runningTotal += intBuffer;
-  } else if (previousOperator === "-") {
-    runningTotal -= intBuffer;
-  } else if (previousOperator === "×") {
-    runningTotal *= intBuffer;
-  } else {
-    runningTotal /= intBuffer;
-  }
-}
-
-function handleSymbol(value) {
-  switch (value) {
-    case "C":
-      buffer = "0";
-      runningTotal = 0;
-      break;
-    case "=":
-      if (previousOperator === null) {
-        // need two numbers to do math
-        return;
-      }
-      flushOperation(parseInt(buffer));
-      previousOperator = null;
-      buffer = +runningTotal;
-      runningTotal = 0;
-      break;
-    case "←":
-      if (buffer.length === 1) {
-        buffer = "0";
-      } else {
-        buffer = buffer.substring(0, buffer.length - 1);
-      }
-      break;
-    case "+":
-    case "-":
-    case "×":
-    case "÷":
-      handleMath(value);
-      break;
-  }
-}
-
-function rerender() {
-  screen.innerText = buffer;
-}
-
-function init() {
-  document.querySelector(".calc-buttons").addEventListener("click", function(event) {
-    buttonClick(event.target.innerText);
-  });
-}
-
-init();
+// Add keyboard shortcuts to the buttons
+document.onkeydown = function(event) {
+ if (event.key === 'Enter') {
+   form.dispatchEvent(new Event('submit'));
+ }
+};
