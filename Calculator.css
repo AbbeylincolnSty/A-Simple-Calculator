@@ -1,73 +1,38 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .calc {
-    width: 400px;
-    background-color: black;
-    color: white;
-  }
-  
-  .screen {
-    color: white;
-    font-size: 40px;
-    font-family: "Courier New", Courier, monospace;
-    text-align: right;
-    padding: 20px 5px;
-  }
-  
-  .calc-button {
-    background-color: #d8d9db;
-    color: black;
-    height: 100px;
-    width: 24.5%;
-    border: none;
-    border-radius: 0;
-    font-size: 40px;
-    cursor: pointer;
-  }
-  
-  .calc-button:hover {
-    background-color: #ebebeb;
-  }
-  
-  .calc-button:active {
-    background-color: #bbbcbe;
-  }
-  
-  .double {
-    width: 49.7%;
-  }
-  
-  .triple {
-    width: 74.8%;
-  }
-  
-  .calc-button:last-child {
-    background-color: #df974c;
-    color: white;
-  }
-  
-  .calc-button:last-child:hover {
-    background-color: #dfb07e;
-  }
-  
-  .calc-button:last-child:active {
-    background-color: #dd8d37;
-  }
-  
-  .calc-button-row {
-    display: flex;
-    align-content: stretch;
-    justify-content: space-between;
-    margin-bottom: 0.5%;
-  }
-  
-  .calc-button-row:last-child {
-    padding-bottom: 0;
-  }
+form {
+ width: 400px; /* Set the form to be a certain width */
+ margin: 50px auto; /* Add some padding and center the form horizontally */
+}
+
+label {
+display: block; /* Make the labels take up the full width of their parent element */
+margin-bottom: 10px; /* Add some space between the labels and the input fields */
+}
+
+input[type="text"], select {
+width: 100%; /* Make the input fields and select menu take up the full width of their parent element */
+padding: 10px; /* Add some padding to the input fields and select menu */
+border: 1px solid #ccc; /* Add a border around the input fields and select menu */
+}
+
+input[type="text"]::placeholder,
+select::placeholder {
+color: #999; /* Change the color of the placeholder text to gray */
+}
+
+button[type="submit"] {
+background-color: #4CAF50; /* Change the background color of the submit button to green */
+color: white; /* Change the text color of the submit button to black */
+padding: 10px 20px; /* Add some padding to the submit button */
+border: none; /* Remove any borders from the submit button */
+border-radius: 5px; /* Add a rounded corner to the submit button */
+cursor: pointer; /* Make the cursor change when hovering over the submit button */
+}
+
+button[type="submit"]:hover {
+background-color: #3e8e41; /* Change the background color of the submit button on hover to blue */
+}
+
+#result {
+font-size: 18px; /* Increase the font size of the result element */
+margin-top: 20px; /* Add some space between the result element and the bottom of the form */
+}
